@@ -3,51 +3,31 @@ This repository documents my Verilog and digital circuit learning for EDA/DFT jo
 
 ## Overview
 This repo contains synthesizable Verilog RTL designs, testbenches, simulation waveforms and learning notes.
-I learned combinational & sequential logic, Finite State Machine(FSM), bus/vector operations, and implemented a complete UART controller project.
-All codes follow industrial coding specifications, laying the foundation for subsequent DFT learning.
-
-## Repository Structure
-verilog_learning/
-├── hdlbits/                # HDLBits exercise codes
-│   ├── week1/
-│   │   ├── rtl/            # Verilog RTL source files
-│   │   ├── tb/             # Testbench files
-│   │   ├── waveform/      # Simulation waveform screenshots
-│   │   └── notes/          # Learning notes & bug records
-│   ├── week2/
-│   ├── week3/
-│   └── week4/
-├── uart_project/           # Core project: UART controller
-│   ├── rtl/                # uart_tx, uart_rx, baud_gen, uart_top
-│   ├── tb/                 # Testbench for UART full system
-│   ├── sim/                # Simulation output & VCD files
-│   └── doc/                # Protocol docs, timing diagram
-├── docs/                   # Learning plans, checklists, bug log
-└── README.md
+Topics covered include combinational & sequential logic, Finite State Machine (FSM), vector/bus operations.
+A complete UART controller project is implemented. All codes follow industrial coding specifications, laying the foundation for subsequent DFT learning.
 
 ## Main Content
-1. **HDLBits Exercises**
-   - Combinational logic: basic logic gates, MUX, decoder, encoder, ALU
-   - Sequential logic: D flip-flop, shift register, counter
-   - FSM (Moore & Mealy), state encoding (binary / one-hot)
-   - Vector / bus operation, bit selection, concatenation & replication operator
+### 1. HDLBits Exercises
+- Combinational logic: basic gates, MUX, decoder, encoder, ALU
+- Sequential logic: D flip-flop, shift register, counter
+- FSM (Moore & Mealy), state encoding (binary / one-hot)
+- Vector & bus operations: bit selection, concatenation, replication operator
 
-2. **UART Controller Project**
-   - Specification: 8 data bits, 1 start bit, 1 stop bit, no parity
-   - Modules:
-     - `baud_gen`: Baud rate clock divider
-     - `uart_tx`: Transmitter module with FSM & parallel-to-serial conversion
-     - `uart_rx`: Receiver module with 16x oversampling & serial-to-parallel conversion
-     - `uart_top`: Top module to instantiate and connect all submodules
-   - Complete testbench for end-to-end simulation and waveform validation
+### 2. UART Controller Project
+Spec: 8 data bits, 1 start bit, 1 stop bit, no parity
+- `baud_gen`: Baud rate clock divider
+- `uart_tx`: Transmitter, FSM + parallel-to-serial conversion
+- `uart_rx`: Receiver, 16x oversampling + serial-to-parallel conversion
+- `uart_top`: Top module for submodule interconnection
+- Complete testbench for end-to-end simulation & waveform validation
 
-## Coding Rules (Followed in all RTL code)
-- Sequential logic inside `always @(posedge clk)`: use non-blocking assignment `<=`
-- Combinational logic inside `always @(*)`: use blocking assignment `=`
-- Add `default` in case statement to avoid unintended latch
-- Snake_case naming convention, no meaningless variable names
-- Comment for each module: function description & port explanation
-- Every RTL module is equipped with corresponding testbench
+## Coding Rules
+- Sequential logic (`always @(posedge clk)`): non-blocking assignment `<=`
+- Combinational logic (`always @(*)`): blocking assignment `=`
+- Add `default` in case statements to avoid unintended latches
+- Snake_case naming convention
+- Module header comment: function and port description
+- Each RTL module comes with a testbench
 
 ## Toolchain
 - Editor: VS Code + Verilog-HDL plugin
@@ -55,17 +35,15 @@ verilog_learning/
 - Online practice: HDLBits
 
 ## Knowledge Coverage
-- Combinational and sequential digital logic design
+- Combinational & sequential digital logic design
 - Vector bus manipulation, bit slice and concatenation
 - Moore & Mealy finite state machine design
-- Full UART communication module design, simulation and debugging
+- UART module design, simulation and debugging
 
 ## Next Stage: DFT Study
 - Timing analysis: Setup time & Hold time
 - Scan chain fundamentals
 - ATPG & stuck-at fault model
-- Build small DFT demo
-
-## Contact
-Feel free to review the code. Suggestions are welcome.
-
+- Small DFT demo implementation
+- 
+Verilog digital IC learning repo for EDA/DFT job hunting. Includes HDLBits exercises and complete UART controller project with testbench and simulation.
