@@ -1,0 +1,14 @@
+# Icarus / GTKWave simulation files
+*.vcd
+*.vvp
+*.log
+*.out
+
+# ModelSim
+transcript
+*.wlf
+vsim*
+
+# OS junk files
+.DS_Store
+Thumbs.db
