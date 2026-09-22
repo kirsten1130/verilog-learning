@@ -1,0 +1,20 @@
+/* HDLBits Vectorgates 题目描述：Distinguish bitwise operators and logical operators.
+Bitwise operation operates on each bit of vector; logical operation treats whole vector as boolean and outputs 1 bit.
+out_or_bitwise: bitwise OR a|b; out_or_logical: logical OR a||b;
+out_not[5:0] = {~b, ~a}，upper half ~b[2:0], lower half ~a[2:0]
+输入：a[2:0], b[2:0]
+输出：out_or_bitwise[2:0]按位或；out_or_logical 逻辑或；out_not[5:0]拼接~b和~a */
+`default_nettype none
+module top_module(
+    input wire [2:0] a,
+    input wire [2:0] b,
+    output wire [2:0] out_or_bitwise,
+    output wire out_or_logical,
+    output wire [5:0] out_not
+);
+
+assign out_or_bitwise = a | b;
+assign out_or_logical = a || b;
+assign out_not = { ~b , ~a };
+
+endmodule
