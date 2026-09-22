@@ -1,0 +1,18 @@
+
+题目描述：
+Build a combinational circuit that splits an input half-word (16 bits, [15:0]) 
+into lower [7:0] and upper [15:8] bytes.
+输入：in[15:0] 16bit
+输出：out_high[7:0] 高8位；out_low[7:0] 低8位
+*/
+`default_nettype none
+module top_module(
+    input wire [15:0] in,
+    output wire [7:0] out_high,
+    output wire [7:0] out_low
+);
+
+assign out_high = in[15:8]; // 截取高8bit
+assign out_low  = in[7:0];  // 截取低8bit
+
+endmodule
