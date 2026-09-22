@@ -1,0 +1,10 @@
+/* HDLBits Vector2 题目描述： A 32-bit vector can be viewed as containing 4 bytes (bits [31:24], [23:16], etc.). Build a circuit that will reverse the byte ordering of the 4-byte word. 输入：in[31:0] 32bit 输出：out[31:0] 字节顺序反转，{in[7:0], in[15:8], in[23:16], in[31:24]} */
+`default_nettype none
+module top_module(
+    input wire [31:0] in,
+    output wire [31:0] out
+);
+
+assign out = { in[7:0], in[15:8], in[23:16], in[31:24] };
+
+endmodule
