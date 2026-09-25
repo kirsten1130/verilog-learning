@@ -1,0 +1,61 @@
+`timescale 1ns/1ps  // 时间单位1ns，时间精度1ps，仿真时间基准
+
+module tb_vector_practice;
+    reg [7:0] data_in;  // 测试激励，输入信号用reg类型
+    reg [7:0] mask;
+    reg [1:0] sel;
+    wire [15:0] result; // DUT输出，testbench内部用wire接收
+    wire        parity;
+
+    integer i;
+
+    // 实例化待测模块DUT，端口映射
+    vector_practice dut (
+        .data_in(data_in),
+        .mask(mask),
+        .sel(sel),
+        .result(result),
+        .parity(parity)
+    );
+
+    // 生成VCD波形文件，GTKWave读取这个文件看波形
+    initial begin
+        $dumpfile("vector_practice.vcd");   // 输出波形文件名
+        $dumpvars(0, tb_vector_practice);   // 记录tb内所有信号
+    end
+
+    // $monitor：自动打印信号，只要信号变化就打印到终端
+    initial begin
+        $monitor("T=%5gt data_in=%h sel=%b result=%h parity=%b",
+            $time, data_in, sel, result, parity);
+    end
+
+    // 测试激励
+    initial begin
+        data_in = 8'h00;
+        mask    = 8'h0F;
+        sel     = 2'b00;
+        #10; // 等待10ns
+
+        // 遍历4种sel，循环4轮测试
+        for (i = 0; i < 4; i = i + 1) begin
+            sel = i[1:0];  // 把循环变量i赋值给2bit sel
+            case (i)
+                0: data_in = 8'hA5;  // 拼接模式，预期 A5A5
+                1: data_in = 8'hF0;  // 符号扩展，预期 FFF0
+                2: data_in = 8'h3C;  // 半字节交换，预期 00C3
+                3: data_in = 8'hA5;  // 异或掩码，预期 00AA
+            endcase
+            #10; // 保持10ns
+        end
+
+        // parity奇偶校验专项测试
+        data_in = 8'h07; #10; // 3个1 → parity=1
+        data_in = 8'h08; #10; // 1个1 → parity=1
+        data_in = 8'h00; #10; // 0个1 → parity=0
+        data_in = 8'hFF; #10; // 8个1 → parity=0
+
+        $display("=== Simulation finished ===");
+        $finish; // 结束仿真
+    end
+endmodule
