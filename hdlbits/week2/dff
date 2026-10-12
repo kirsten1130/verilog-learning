@@ -1,0 +1,26 @@
+module top_module ( input clk, input d, output q );
+
+// 定义内部连线，触发器之间的导线
+wire w1;
+wire w2;
+
+// 例化3个D触发器，实例名字必须互不相同
+my_dff u1(
+    .clk(clk),
+    .d(d),
+    .q(w1)
+);
+
+my_dff u2(
+    .clk(clk),
+    .d(w1),
+    .q(w2)
+);
+
+my_dff u3(
+    .clk(clk),
+    .d(w2),
+    .q(q)
+);
+
+endmodule
